@@ -2,37 +2,39 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
+	"github.com/buger/jsonparser"
 	"github.com/everystreet/go-shapefile"
 	"os"
 )
 
 func main() {
-	file, err := os.Open("C:\\test\\Z_NGII_N3A_G0010000.zip")
+	file, _ := os.Open("C:\\Users\\zeus\\Desktop\\오늘\\용도별건물정보\\AL_11110_D198_20220118.zip")
+	//file, err := os.Open("C:\\Users\\zeus\\Desktop\\오늘\\용도별건물정보\\AL_11140_D198_20220118.zip")
+	//file, err := os.Open("C:\\ Users\\zeus\\Desktop\\오늘\\용도별건물정보\\AL_11170_D198_20220118.zip")
 	//file, err := os.Open("C:\\test\\LARD_ADM_SECT_SGG_제주.zip")
-	fmt.Println(err)
-	stat, err := file.Stat()
-	fmt.Println(err)
-	scanner, err := shapefile.NewZipScanner(file, stat.Size(), stat.Name())
-	fmt.Println(stat.Name())
-	fmt.Println(err)
+	stat, _ := file.Stat()
+	scanner, _ := shapefile.NewZipScanner(file, stat.Size(), stat.Name())
 
-	//info, err := scanner.Info()
-	//fmt.Println(info)
-
-	err = scanner.Scan()
+	_ = scanner.Scan()
 
 	for {
 		record := scanner.Record()
+
 		feature := record.GeoJSONFeature()
-		jsonData, _ := json.Marshal(feature)
-		fmt.Println(string(jsonData))
+		jsonData, _ := json.Marshal(feature.Geometry)
+		get, _, _, _ := jsonparser.Get(jsonData, "coordinates")
+		var t1 [][][]float64
+		_ = json.Unmarshal(get, &t1)
+		//polygonResult := ""
+		//for _, multiPolygon := range t1[0] {
+		//	polygonResult += fmt.Sprintf(", %v %v", multiPolygon[0], multiPolygon[1])
+		//
+		//
+		//	// Each record contains a shape (from .shp file) and attributes (from .dbf file)
+		//	fmt.Println(record)
+		//}
 		if record == nil {
 			break
 		}
-
-		// Each record contains a shape (from .shp file) and attributes (from .dbf file)
-		fmt.Println(record)
 	}
-
 }

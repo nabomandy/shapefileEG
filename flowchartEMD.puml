@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:ReadInsertEmdData(LSMD_ADM_XXX.geojon);
+:TRUNCATE TABLE TRUNCATE TABLE public.layer_emd;
+if (TRUNCATE TABLE.Error != nil) then (yes)
+    end
+'    stop
+endif;
+:ReadFile LSMD_ADM_XXX.geojon;
+'repeat:range collection.Features;
+'repeat while
+:range collection.Features;
+:데이터 삽입, batchSize = 10;
+if (데이터 입력 성공?) then (yes)
+    :success log;
+  else (no)
+  endif
+end
+
+@enduml

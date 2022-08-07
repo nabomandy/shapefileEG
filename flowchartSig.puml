@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:ReadInsertSigData(LARD_ADM_SECT_SGG_XX.geojson);
+:ReadFile LARD_ADM_SECT_SGG_XX.geojson;
+'repeat:range collection.Features;
+'repeat while
+:range collection.Features;
+:데이터 삽입, batchSize = 10;
+if (데이터 입력 성공?) then (yes)
+    :success log;
+  else (no)
+  endif
+end
+
+@enduml

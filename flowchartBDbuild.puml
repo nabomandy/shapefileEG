@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:ReadInsertBuildingData(build_XXX.txt);
+
+:OpenFile build_XXX.txt;
+if (파일 이름이 XX_건물DB_변동분?) then (yes)
+    switch ( 변경사유코드로 스위칭 )
+       case ( 31(신규) )
+        :insert 로직;
+       case ( 34(변경) )
+        :update 로직;
+       case ( 63(폐지) )
+        :delete 로직;
+    endswitch
+else (no)
+  :insert 로직;
+endif
+end
+
+@enduml

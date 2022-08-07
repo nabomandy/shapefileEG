@@ -1,0 +1,84 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:RunReadDatafile("C:\\juso\\updateTest");
+switch (test?)
+case ( condition A )
+  :Text 1;
+case ( condition B )
+  :Text 2;
+case ( condition C )
+  :Text 3;
+
+case ( condition D )
+  :Text 4;
+case ( condition E )
+  :Text 5;
+
+endswitch
+
+repeat:fileLists;
+    switch (strings.Contains?)
+    case ( 주소DB_전체분 )
+      :TRUNCATE TABLE;
+    case ( 건물DB_전체분 )
+      :TRUNCATE TABLE;
+    case ( 내비게이션용DB_전체분 )
+      :TRUNCATE TABLE;
+    case ( 빌딩DB_전체분)
+      :TRUNCATE TABLE;
+    case ( 읍면동DB_전체분 )
+      :TRUNCATE TABLE;
+    case ( 시군구DB_전체분 )
+      :TRUNCATE TABLE;
+    endswitch
+
+-> ;
+repeat while
+
+repeat:fileList;
+    switch (strings.Contains?)
+    case ( 지번_ )
+      :TRUNCATE TABLE;
+    case ( 주소_ )
+      :TRUNCATE TABLE;
+    case ( 도로명코드_ )
+      :TRUNCATE TABLE;
+    case ( FCLTS_ && .geojson)
+      :TRUNCATE TABLE;
+    case ( 기상청41_ && .xlsx )
+      :TRUNCATE TABLE;
+    case ( 한국행정구역분류_ )
+      :TRUNCATE TABLE;
+    case ( LSMD_ADM_ && .geojson)
+      :TRUNCATE TABLE;
+    case ( Z_SOP_BND_ && .geojson)
+     :TRUNCATE TABLE;
+    case ( LARD_ADM_ && .geojson)
+     :TRUNCATE TABLE;
+    case ( NGII_CDM_ && .geojson)
+     :TRUNCATE TABLE;
+    endswitch
+
+-> ;
+repeat while
+
+
+:RunReadDatafile("C:\\juso\\updateTest");
+:RunReadDatafile("C:\\juso\\updateTest");
+:RunReadDatafile("C:\\juso\\updateTest");
+:RunReadDatafile("C:\\juso\\updateTest");
+:RunReadDatafile("C:\\juso\\updateTest");
+:RunReadDatafile("C:\\juso\\updateTest");
+:RunReadDatafile("C:\\juso\\updateTest");
+:RunReadDatafile("C:\\juso\\updateTest");
+:RunReadDatafile("C:\\juso\\updateTest");
+:RunReadDatafile("C:\\juso\\updateTest");
+:RunReadDatafile("C:\\juso\\updateTest");
+:RunReadDatafile("C:\\juso\\updateTest");
+:RunReadDatafile("C:\\juso\\updateTest");
+:RunReadDatafile("C:\\juso\\updateTest");
+
+stop
+@enduml

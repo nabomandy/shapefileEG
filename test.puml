@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+
+
+Alice->Alice: This is a signal to self.\nIt also demonstrates\nmultiline \ntext
+
+
+Bob ->x Alice
+Bob -> Alice
+Bob ->> Alice
+Bob -\ Alice
+Bob \\- Alice
+Bob //-- Alice
+Bob ->o Alice
+Bob o\\-- Alice
+Bob <-> Alice
+Bob <->o Alice
+
+
+
+Bob -[#red]> Alice : hello
+Alice -[#0000FF]->Bob : ok
+
+Bob -> Alice : <b>글씨 진하게</b>
+Alice -> Bob : <i>글씨 italic</i>
+
+
+autonumber
+Bob -> Alice : autonumber = 1번 부터 autonumber
+Bob <- Alice : 다음이니까 2번
+
+
+autonumber 15
+Bob -> Alice : autonumber 15 = 15번 부터 시작
+Bob <- Alice : 16번 이다
+
+
+autonumber 10 100
+Bob -> Alice : autonumber 10 100 = 10으로 시작 100씩 증가
+Bob <- Alice : 10 다음이니까 110
+
+
+@enduml
+

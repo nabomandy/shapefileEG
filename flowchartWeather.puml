@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:ReadInsertWeatherGridData(기상청41_XXX.xlsx);
+:TRUNCATE TABLE public.weather_grid;
+if (TRUNCATE TABLE.Error != nil) then (yes)
+    end
+'    stop
+endif;
+:OpenFile 기상청41_XXX.xlsx;
+repeat:range 최종 업데이트 파일_ rows;
+if (index%batchSize == 0) then (yes)
+  :데이터 삽입;
+  if (데이터 입력 성공?) then (yes)
+    :success log;
+  else (no)
+    end
+  endif
+else (no)
+  :index++;
+endif
+repeat while
+if (데이터 입력 성공?) then (yes)
+    :success log;
+  else (no)
+    end
+  endif
+
+end
+
+@enduml
