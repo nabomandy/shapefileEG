@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+start
+:ClickServlet.handleRequest();
+partition #lightyellow "**requestMapping** " {
+#pink:DBConnection.getConnection();
+#pink:requestParamV1;
+}
+
+partition #lightGreen "**Logic** V1" {
+if (Page.onSecurityCheck) then (true)
+  :Page.onInit();
+
+  if (isForward?) then (no)
+    #green:Process controls;
+    if (continue processing?) then (no)
+      stop
+    endif
+
+    if (isPost?) then (yes)
+      #blue:Page.onPost();
+    else (no)
+      #red:Page.onGet();
+    endif
+    #skyblue:Page.onRender();
+  endif
+else (false)
+endif
+}
+if (do redirect?) then (yes)
+  #white:redirect process;
+else
+partition #lightblue "**PRG** " {
+  if (do forward?) then (yes)
+    #yellow:Forward request;
+  else (no)
+    #hotpink:Render page template;
+  endif
+}
+endif
+
+stop
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:ReadInsertHjdBjcdData(한국행정구역분류_XXX.xlsx);
+:TRUNCATE TABLE public.hjd_bjcd_code;
+if (TRUNCATE TABLE.Error != nil) then (yes)
+    end
+'    stop
+endif;
+:OpenFile 한국행정구역분류_XXX.xlsx;
+repeat:range 행정동 및 법정동코드와의 연계표 rows;
+if (index%batchSize == 0) then (yes)
+  :데이터 삽입;
+  if (데이터 입력 성공?) then (yes)
+    :success log;
+  else (no)
+    end
+  endif
+else (no)
+  :index++;
+endif
+repeat while
+if (데이터 입력 성공?) then (yes)
+    :success log;
+  else (no)
+    end
+  endif
+
+end
+
+@enduml

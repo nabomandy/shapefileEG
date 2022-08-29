@@ -1,0 +1,76 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:파일경로읽기;
+:getFileListByFileDirPath;
+:getFileLists;
+partition #lightBlue "**Truncate Table** " {
+repeat:range fileLists;
+'    switch (strings.Contains?)
+'    case ( 주소DB_전체분 )
+'      :TRUNCATE TABLE;
+'    case ( 건물DB_전체분 )
+'      :TRUNCATE TABLE;
+'    case ( 내비게이션용DB_전체분 )
+'      :TRUNCATE TABLE;
+'    case ( 빌딩DB_전체분)
+'      :TRUNCATE TABLE;
+'    case ( 읍면동DB_전체분 )
+'      :TRUNCATE TABLE;
+'    case ( 시군구DB_전체분 )
+'      :TRUNCATE TABLE;
+'    endswitch
+':전체분폴더있으면;
+if (name_전체분 폴더 있으면?) then (yes)
+  :truncate Table;
+else (no)
+  :nothing;
+endif
+repeat while
+}
+':test;
+
+partition #lightyellow "**DataMapping** " {
+repeat:len(fileList);
+'    switch (strings.Contains?)
+'    case ( 주소DB_전체분 )
+'      :TRUNCATE TABLE;
+'    case ( 건물DB_전체분 )
+'      :TRUNCATE TABLE;
+'    case ( 내비게이션용DB_전체분 )
+'      :TRUNCATE TABLE;
+'    case ( 빌딩DB_전체분)
+'      :TRUNCATE TABLE;
+'    case ( 읍면동DB_전체분 )
+'      :TRUNCATE TABLE;
+'    case ( 시군구DB_전체분 )
+'      :TRUNCATE TABLE;
+'    endswitch
+':전체분폴더있으면;
+if ( fileName or \n fileName 과 확장자가 \n정해진 명칭과 일치하면) then (yes)
+if (파일명= 00_변동분?) then (no      )
+  :(insert 로직;
+else (     yes)
+    switch ( 변경사유코드로 스위칭 )
+    case ( insert 코드)
+      :insert 로직;
+    case ( update 코드 )
+      :update 로직;
+    case ( delete 코드 )
+      :delete 로직;
+    endswitch
+endif
+else (no)
+':없다;
+
+endif
+repeat while
+}
+
+'if (전체분 폴더 있으면)
+:update Join;
+
+end
+
+@enduml

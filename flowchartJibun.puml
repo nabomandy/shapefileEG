@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:ReadInsertJiBunData(지번_XXX.txt);
+
+:OpenFile 지번_XXX.txt;
+if (파일 이름이 XX_관련지번_변동분?) then (yes)
+    switch ( 변경사유코드로 스위칭 )
+       case (\n 31(신규) \n)
+        :insert 로직;
+       case (\n "34", "51", "70", "71", "79"(변경) \n)
+        :update 로직;
+       case (\n 63(폐지) \n)
+        :delete 로직;
+    endswitch
+else (no)
+  :insert 로직;
+endif
+end
+
+@enduml
